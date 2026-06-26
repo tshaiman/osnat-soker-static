@@ -1,0 +1,111 @@
+---
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mnjkdgdq';
+---
+
+<form class="contact-form" action={FORMSPREE_ENDPOINT} method="POST" novalidate>
+  <div class="field">
+    <label for="cf-name">שם <span aria-hidden="true">*</span></label>
+    <input id="cf-name" name="שם" type="text" autocomplete="name" required placeholder="שם" />
+  </div>
+
+  <div class="field">
+    <label for="cf-email">אימייל <span aria-hidden="true">*</span></label>
+    <input id="cf-email" name="אימייל" type="email" autocomplete="email" required placeholder="אימייל" />
+  </div>
+
+  <div class="field">
+    <label for="cf-message">הודעה <span aria-hidden="true">*</span></label>
+    <textarea id="cf-message" name="הודעה" rows="5" required placeholder="הודעה"></textarea>
+  </div>
+
+  <button type="submit" class="btn">שליחה</button>
+
+  <p class="form-status" role="status" aria-live="polite" hidden></p>
+</form>
+
+<style>
+  .contact-form { width: 100%; }
+  .field { margin-bottom: 1.1rem; text-align: start; }
+  .field label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--color-text);
+  }
+  .field label span { color: var(--color-magenta); }
+  .field input,
+  .field textarea {
+    width: 100%;
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    color: var(--color-text);
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 0.7rem 0.85rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .field textarea { resize: vertical; min-height: 120px; }
+  .field input:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--color-magenta);
+    box-shadow: 0 0 0 3px rgba(211, 52, 138, 0.12);
+  }
+  .form-status {
+    margin: 1rem 0 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .form-status.is-success { color: var(--color-teal); }
+  .form-status.is-error { color: var(--color-magenta); }
+</style>
+
+<script is:inline>
+  (function () {
+    const f = document.querySelector('.contact-form');
+    if (!f) return;
+    const status = f.querySelector('.form-status');
+
+    function show(msg, kind) {
+      status.textContent = msg;
+      status.hidden = false;
+      status.classList.remove('is-success', 'is-error');
+      status.classList.add(kind === 'ok' ? 'is-success' : 'is-error');
+    }
+
+    f.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!f.checkValidity()) {
+        show('אנא מלאו את כל השדות הנדרשים', 'error');
+        f.reportValidity();
+        return;
+      }
+      const btn = f.querySelector('button[type="submit"]');
+      const original = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'שולח…';
+      try {
+        const res = await fetch(f.action, {
+          method: 'POST',
+          body: new FormData(f),
+          headers: { Accept: 'application/json' },
+        });
+        if (res.ok) {
+          f.reset();
+          show('תודה! ההודעה נשלחה', 'ok');
+        } else {
+          show('אירעה שגיאה, אנא נסו שנית', 'error');
+        }
+      } catch (err) {
+        show('אירעה שגיאה, אנא נסו שנית', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = original;
+      }
+    });
+  })();
+</script>

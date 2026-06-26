@@ -1,0 +1,72 @@
+---
+const FB = 'https://www.facebook.com/soker.osnat';
+const keywords = 'פסיכותרפיה | יחסים בין אישיים | אינטימיות | חרדה | דכאון | אובדן | שכול';
+---
+
+<footer class="site-footer">
+  <a href="#home" class="to-top" aria-label="חזרה לראש העמוד">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg>
+  </a>
+
+  <div class="container footer-inner">
+    <a
+      href={FB}
+      class="footer-social"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="פייסבוק של אסנת סוקר"
+    >
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+        <path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/>
+      </svg>
+    </a>
+
+    <p class="footer-copy">© כל הזכויות שמורות לאוסנת סוקר - פסיכותרפיסטית</p>
+    <p class="footer-keywords">{keywords}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    position: relative;
+    background: var(--color-charcoal);
+    color: var(--color-lime);
+    padding: 3rem 1rem 2.5rem;
+    text-align: center;
+  }
+  .to-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin: 0 auto 1.75rem;
+    border: 2px solid var(--color-lime);
+    border-radius: 50%;
+    color: var(--color-lime);
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .to-top:hover {
+    background: var(--color-lime);
+    color: var(--color-charcoal);
+  }
+  .footer-social {
+    display: inline-flex;
+    margin-bottom: 1.5rem;
+    color: var(--color-lime);
+    transition: opacity 0.2s ease;
+  }
+  .footer-social:hover { opacity: 0.7; }
+  .footer-copy {
+    margin: 0 0 0.5rem;
+    font-size: 0.95rem;
+    color: var(--color-lime);
+  }
+  .footer-keywords {
+    margin: 0;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    color: var(--color-lime);
+    opacity: 0.92;
+  }
+</style>

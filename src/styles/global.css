@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Osnat Soker — Psychotherapy · RTL Hebrew
+   Palette calibrated from logo asset + site screenshots:
+   magenta CTA · teal · lime/olive · charcoal · warm beige
+   ============================================================ */
+
+/* Fonts (Assistant + Heebo) are loaded via <link> in Layout.astro <head>. */
+
+:root {
+  /* Backgrounds */
+  --color-bg:        #FFFFFF;   /* default white sections */
+  --color-bg-beige:  #F1ECE1;   /* hero — warm cream/beige */
+  --color-bg-soft:   #FAF8F4;   /* very light warm tint */
+  --color-bg-gray:   #F5F4F2;   /* services grid light gray */
+  --color-charcoal:  #5F5F61;   /* nav bar + "why therapy" dark band */
+  --color-charcoal-2:#545456;   /* slightly darker for the nav links bar */
+
+  /* Text */
+  --color-text:       #3A3A3C;   /* main body text */
+  --color-text-muted: #8A8A8C;   /* captions / attributions */
+  --color-text-light: #FFFFFF;   /* text on dark bands */
+  --color-text-faint: #B6B4AF;   /* section eyebrow headings (על הטיפול) */
+
+  /* Brand accents (from logo) */
+  --color-magenta:       #D3348A;   /* CTA buttons, links, accents */
+  --color-magenta-dark:  #A82268;   /* button 3D bottom edge / hover */
+  --color-teal:          #00BDB4;   /* big "על הטיפול" quote */
+  --color-lime:          #BDD868;   /* "why therapy" quote + footer text */
+  --color-skyblue:       #A8D9E2;   /* soft blue accent */
+
+  /* Borders */
+  --color-border:      #E6E2DA;
+  --color-border-soft: #ECECEC;
+
+  /* Typography */
+  --font-primary: 'Heebo', sans-serif;
+  --font-display: 'Assistant', 'Heebo', sans-serif;
+  --line-height-base: 1.85;
+
+  /* Layout */
+  --nav-height: 116px;            /* two-tier nav total height (desktop) */
+  --maxw: 1200px;
+}
+
+/* ---------- Base / RTL ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  direction: rtl;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-primary);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: var(--line-height-base);
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0;
+}
+
+p { margin: 0 0 1.25em; }
+p:last-child { margin-bottom: 0; }
+
+a { color: inherit; text-decoration: none; }
+
+img { max-width: 100%; display: block; }
+
+/* Anchor scroll offset so sticky nav doesn't cover section tops */
+[id] { scroll-margin-top: calc(var(--nav-height) + 16px); }
+
+/* ---------- Layout helper ---------- */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.section {
+  padding-block: clamp(3.5rem, 8vw, 6rem);
+}
+
+/* ---------- Eyebrow heading with flanking rules (e.g. "על הטיפול") ---------- */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  justify-content: center;
+  color: var(--color-text-faint);
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+  letter-spacing: 0.04em;
+  margin-bottom: 2.5rem;
+}
+.eyebrow::before,
+.eyebrow::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #fff;
+  background: var(--color-magenta);
+  border: 0;
+  border-radius: 4px;
+  padding: 0.85rem 2.2rem;
+  cursor: pointer;
+  /* the original buttons have a darker bottom edge (3D pill-ish) */
+  box-shadow: 0 4px 0 0 var(--color-magenta-dark);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+}
+.btn:hover {
+  background: var(--color-magenta-dark);
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 0 var(--color-magenta-dark);
+}
+.btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 0 var(--color-magenta-dark);
+}
+
+/* ---------- Quotes ---------- */
+blockquote { margin: 0; }
+
+.quote-teal {
+  color: var(--color-teal);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  line-height: 1.35;
+  text-align: center;
+}
+
+.quote-lime {
+  color: var(--color-lime);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3.2vw, 2.3rem);
+  line-height: 1.4;
+}
+
+/* ---------- Animations ---------- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-on-load { animation: fadeInUp 0.7s ease-out both; }
+
+/* Scroll-reveal: hidden until IntersectionObserver adds .visible */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  will-change: opacity, transform;
+}
+[data-animate].visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-on-load,
+  [data-animate] {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

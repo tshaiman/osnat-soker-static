@@ -1,0 +1,34 @@
+---
+interface Props {
+  id?: string;
+  bg?: 'white' | 'beige' | 'soft' | 'gray' | 'charcoal';
+  class?: string;
+  full?: boolean; // if true, no inner .container wrapper (caller controls width)
+}
+
+const { id, bg = 'white', class: className = '', full = false } = Astro.props;
+
+const bgMap: Record<string, string> = {
+  white: 'var(--color-bg)',
+  beige: 'var(--color-bg-beige)',
+  soft: 'var(--color-bg-soft)',
+  gray: 'var(--color-bg-gray)',
+  charcoal: 'var(--color-charcoal)',
+};
+const isDark = bg === 'charcoal';
+---
+
+<section
+  id={id}
+  class:list={['section', className, { 'on-dark': isDark }]}
+  style={`background:${bgMap[bg]};`}
+>
+  {full ? <slot /> : <div class="container"><slot /></div>}
+</section>
+
+<style>
+  .on-dark { color: var(--color-text-light); }
+  .on-dark :global(h1),
+  .on-dark :global(h2),
+  .on-dark :global(h3) { color: var(--color-text-light); }
+</style>
