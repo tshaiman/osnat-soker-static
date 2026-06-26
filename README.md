@@ -1,43 +1,61 @@
-# Astro Starter Kit: Minimal
+# אסנת סוקר — אתר פסיכותרפיה
+
+A custom static website for **Osnat Soker**, a psychotherapist based in Modi'in, Israel.
+Converted from a Wix site to a self-hosted Astro site.
+
+## Stack
+
+- [Astro 6.4](https://astro.build) — static site generator (`output: 'static'`)
+- [Tailwind CSS v4](https://tailwindcss.com) — via `@tailwindcss/vite`
+- Hebrew RTL layout (`dir="rtl" lang="he"`)
+- [Formspree](https://formspree.io) — contact form email delivery (form ID: `mnjkdgdq`)
+
+## Requirements
+
+Node.js **≥ 22.12.0** is required. If you're using nvm and get an error, run:
 
 ```sh
-npm create astro@latest -- --template minimal
+nvm install 22 && nvm use 22
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Commands
 
-## 🚀 Project Structure
+| Command           | Action                                      |
+|:------------------|:--------------------------------------------|
+| `npm install`     | Install dependencies                        |
+| `npm run dev`     | Start dev server at `localhost:4321`        |
+| `npm run build`   | Build static output to `./dist/`            |
+| `npm run preview` | Preview production build locally            |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Project Structure
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```
+src/
+├── components/
+│   ├── ContactForm.astro   # Formspree-powered contact form
+│   ├── Footer.astro        # Footer with Facebook link + scroll-to-top
+│   ├── Nav.astro           # Sticky two-tier nav + mobile hamburger
+│   └── Section.astro       # Reusable section wrapper
+├── layouts/
+│   └── Layout.astro        # HTML shell, RTL, OG meta, scroll-reveal
+├── pages/
+│   └── index.astro         # Single-page site (all 6 sections)
+└── styles/
+    └── global.css          # CSS variables, RTL reset, animations
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Contact Form
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+The form POSTs to Formspree (`https://formspree.io/f/mnjkdgdq`).
+To change the destination email, log in to [formspree.io](https://formspree.io) and update the form settings.
+Free tier allows 50 submissions/month.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Deployment
 
-## 🧞 Commands
+Hosted on **Cloudflare Pages**.
 
-All commands are run from the root of the project, from a terminal:
+- Build command: `npm run build`
+- Output directory: `dist`
+- Node version: `22` (set in Cloudflare Pages environment variables: `NODE_VERSION=22`)
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+To deploy: push to GitHub, connect the repo in Cloudflare Pages dashboard.

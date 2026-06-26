@@ -370,7 +370,7 @@ The logo has TWO parts (visible in screenshot top-right, since RTL):
 - Background: warm beige/cream with subtle texture or gradient
 - Rilke poem in medium-weight sans-serif, large, dark text
 - CTA button: pink (#C96B87), rounded pill shape, white text
-  Text: "התקשרו, ראשית חינם כאן" or "התקשרו עכשיו"
+  Text: "התקשרו עכשיו"
 
 ### Section 2: Hero (confirmed from screenshot)
 - **Background:** warm beige/cream — `#F0EBE3` or similar
@@ -381,7 +381,7 @@ The logo has TWO parts (visible in screenshot top-right, since RTL):
 - **Poem text:** each line on its own line, medium weight (~500), font-size ~1.3rem, dark text
 - **Attribution:** smaller, muted, below the poem
 - **CTA button:** pill shape (border-radius: 50px), background #C96B87 (pink), white text,
-  label visible as something like "התקשרו, ראשית חינם כאן" — confirm exact label from Osnat
+  label: "התקשרו עכשיו"
 - No full-screen height — hero is maybe 50-60vh, natural content height
 
 ### Section 3: Why Therapy — DARK (confirmed from screenshot)
@@ -563,7 +563,7 @@ STEP 5 — Build src/pages/index.astro (ONE FILE, all 8 sections in order):
           "לחיות את התשובה."
         Attribution: ריינה מריה רילקה, "מכתבים אל משורר צעיר" (small, muted)
         CTA button: pill shape (border-radius: 50px), bg #C96B87, white text,
-          label: "התקשרו, ראשית שיחה חינם" → href="tel:050-5289895"
+          label: "התקשרו עכשיו" → href="tel:050-5289895"
 
   Section 2 — WHY THERAPY (id="why-therapy"):
     bg: #3D3D3D (dark charcoal)
