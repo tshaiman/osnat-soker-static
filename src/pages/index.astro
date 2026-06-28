@@ -54,7 +54,7 @@ const aboutParas = [
 ];
 
 // ---- About therapy (על הטיפול) ----
-const therapyHeadQuote = '״ההחלטה לפנות לטיפול כרוכה בהתייסרות ובהתלבטויות קשות.״';
+const therapyHeadQuote = '״ההחלטה לפנות לטיפול אינה מן הקלות, והיא כרוכה בהתלבטויות ובייסורים קשים.״';
 const therapyBlocks = [
   { text: 'פעמים רבות אדם משוכנע שהוא יכול להתמודד בכוחות עצמו עם המצוקה, לפנות לחבר קרוב ובכך לחסוך את העלויות הכרוכות בפנייה לטיפול, או לדחות את הפנייה לטיפול לזמן ״מתאים יותר״.', bold: false },
   { text: 'טיפול אינו יכול להוות תחליף לשיחה עם חבר שכן הוא מושתת על קשר עם המטפל בעבודה על ה׳לא-מודע׳ שמתוכו מתאפשר שינוי נפשי עמוק.', bold: true },
@@ -110,7 +110,11 @@ const services = [
       </div>
 
       <div class="hero__photo animate-on-load">
-        <img src="/images/osnat-about.jpg" alt="אסנת סוקר, פסיכותרפיסטית" width="760" height="730" />
+        <div class="hero__photo-frame">
+          <div class="hero__ring hero__ring--lime"></div>
+          <div class="hero__ring hero__ring--magenta"></div>
+          <img class="hero__photo-img" src="/images/osnat-about.jpg" alt="אסנת סוקר, פסיכותרפיסטית" width="760" height="730" />
+        </div>
       </div>
     </div>
   </section>
@@ -265,15 +269,52 @@ const services = [
     font-size: 0.95rem;
   }
   .hero__cta { margin-top: 1.75rem; }
-  .hero__photo { display: flex; justify-content: center; }
-  .hero__photo img {
-    width: clamp(220px, 30vw, 360px);
-    aspect-ratio: 1 / 1;
+  .hero__photo {
+    display: flex;
+    justify-content: center;
+  }
+  /* frame: wide enough for both rings + photo overlap */
+  .hero__photo-frame {
+    position: relative;
+    width: clamp(260px, 34vw, 420px);
+    height: clamp(240px, 32vw, 400px);
+  }
+  /* photo: large circle, dominant, centered */
+  .hero__photo-img {
+    position: absolute;
+    z-index: 3;
+    width: 80%;
+    aspect-ratio: 1;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     object-fit: cover;
     object-position: center top;
     border-radius: 50%;
-    border: 8px solid var(--color-magenta);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  }
+  /* rings: slightly smaller than photo, mostly hidden behind it */
+  .hero__ring {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    width: 62%;
+    aspect-ratio: 1;
+    height: auto;
+  }
+  /* lime: bottom-left crescent */
+  .hero__ring--lime {
+    background: #bada55;
+    bottom: 6%;
+    left: 6%;
+  }
+  /* magenta: top-right crescent */
+  .hero__ring--magenta {
+    background: #c81a78;
+    top: 6%;
+    right: 6%;
   }
 
   /* ---------- WHY THERAPY ---------- */
